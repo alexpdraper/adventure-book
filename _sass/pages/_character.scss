@@ -1,0 +1,36 @@
+.tab-buttons {
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  font-size: 0.75rem;
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  .button {
+    min-width: 2.75em;
+    height: 2.75em;
+    border: 0;
+    margin-right: 0.75rem;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+    position: relative;
+    &:hover,
+    &.is-active {
+      color: $text-color-light;
+    }
+
+    &:hover::after {
+      content: attr(aria-label);
+      position: absolute;
+      bottom: -1em;
+      background: $text-color;
+      color: $secondary-color;
+      padding: 5px 8px;
+      border-radius: 1234908px;
+      font-size: 0.75rem;
+      box-shadow: 0 2px 5px rgba(10, 10, 10, 0.15);
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{% assign spells_list = "" | split: "" %}
+{% for spell_name in include.spells %}
+  {% assign spell = site.spells | where: "name", spell_name | first %}
+  {% if spell %}
+    {% assign spells_list = spells_list | push: spell %}
+  {% endif %}
+{% endfor %}
+
+{% assign spells_list = spells_list | sort: "level" | group_by: "level" %}
+{% for spell_level in spells_list %}
+  {% if spell_level.name == "0" %}
+    <h4>Cantrips</h4>
+  {% else %}
+    <h4>Level {{spell_level.name}}</h4>
+  {% endif %}
+    {% assign spells = spell_level.items | sort: "name" %}
+    {% for spell in spells %}
+    <div class="character-spells">
+      <details>
+        <summary class="h5">{{spell.name}}</summary>
+        <div class="article spell-details">
+          {% include spell_info_table.html spell=spell %}
+          {{spell.content | markdownify}}
+        </div>
+      </details>
+    </div>
+    {% endfor %}
+{% endfor %}

@@ -1,0 +1,44 @@
+---
+layout: main
+title: Spells
+breadcrumbs:
+  - label: Home
+    url: /
+---
+
+{% assign spells = site.spells | sort: "title" | group_by: "level" | sort: "name" %}
+
+{% include breadcrumbs.html breadcrumbs=page.breadcrumbs %}
+
+<div class="article section">
+  <h1>Spells</h1>
+
+  <p style="color: #777; font-family: 'Source Sans Pro', sans-serif; font-weight: 300;">
+    <a href="#cantrips">Cantrips</a>&nbsp;/
+    <a href="#level-1">Level&nbsp;one</a>&nbsp;/
+    <a href="#level-2">Level&nbsp;two</a>&nbsp;/
+    <a href="#level-3">Level&nbsp;three</a>&nbsp;/
+    <a href="#level-4">Level&nbsp;four</a>&nbsp;/
+    <a href="#level-5">Level&nbsp;five</a>&nbsp;/
+    <a href="#level-6">Level&nbsp;six</a>&nbsp;/
+    <a href="#level-7">Level&nbsp;seven</a>&nbsp;/
+    <a href="#level-8">Level&nbsp;eight</a>&nbsp;/
+    <a href="#level-9">Level&nbsp;nine</a>
+  </p>
+
+  {% for spell_group in spells %}
+    {% if spell_group.name == "0" %}
+      <h2 id="cantrips">Cantrips (level 0)</h2>
+    {% else %}
+      <h2 id="level-{{spell_group.name}}">Level {{spell_group.name}}</h2>
+    {% endif %}
+
+    <ul class="spells-list">
+      {% for spell in spell_group.items %}
+      <li class="spells-list-item">
+        <a href="{{spell.url}}">{{spell.name}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+</div>

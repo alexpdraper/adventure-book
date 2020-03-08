@@ -1,0 +1,104 @@
+{%- comment -%}
+includes:
+  - strength
+  - dexterity
+  - proficiency_bonus
+  - weapons
+{%- endcomment -%}
+
+{% assign strength_modifier = include.strength | minus: 10 | divided_by: 2 | floor %}
+{% assign dex_modifier = include.dexterity | minus: 10 | divided_by: 2 | floor %}
+{% assign finesse_modifier = strength_modifier | at_least: dex_modifier %}
+
+<div class="article">
+  {% for weapon in include.weapons %}
+    {% assign weapon_data = site.data.weapons | where: "title", weapon.extends | first %}
+    {% assign to_hit = weapon.to_hit_modifier | default: weapon_data.to_hit_modifier | default: 0 %}
+    {% assign to_hit = to_hit | plus: include.proficiency_bonus %}
+
+    {% assign finesse = false %}
+    {% for property in weapon_data.properties %}
+      {% if property == "finesse" %}
+        {% assign finesse = true %}
+      {% endif %}
+    {% endfor %}
+
+    {% if finesse %}
+      {% assign to_hit = to_hit | plus: finesse_modifier %}
+    {% elsif weapon_data.type == "melee" %}
+      {% assign to_hit = to_hit | plus: strength_modifier %}
+    {% else %}
+      {% assign to_hit = to_hit | plus: dex_modifier %}
+    {% endif %}
+
+    {% assign weapon_damage = weapon.damage | default: weapon_data.damage %}
+
+    {%- comment -%}
+    <p style="margin-bottom: 0.25em">
+      {%- assign weapon_icon = weapon.icon | default: weapon_data.icon | default: "fad fa-swords" -%}
+      <span class="icon" style="padding-right: 0.25em;"><i class="{{weapon_icon}}"></i></span>
+      {{weapon.title | default: weapon_data.title}}
+      &times;{{weapon.quantity | default: 1}}
+    </p>
+    {%- endcomment -%}
+    <table style="width: 100%; margin-bottom: 1rem;">
+      <thead>
+        <tr style="text-align: left;">
+          <th colspan="2" style="border-top: 1px solid #4f3015; background-color: #e1d0d0; background-image: url('/assets/images/pink-stardust.png')">
+            {%- assign weapon_icon = weapon.icon | default: weapon_data.icon | default: "fad fa-swords" -%}
+            <span class="icon" style="padding-right: 0.25em;"><i class="{{weapon_icon}}"></i></span>
+            {{weapon.title | default: weapon_data.title}}
+            &times;{{weapon.quantity | default: 1}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th style="text-align: left; border: 0; width: 30%; vertical-align: top;">Damage</th>
+          <td style="border: 0; vertical-align: top;">
+            {% assign weapon_dice = weapon_damage | split: "d" %}
+            {% assign damage_modifier = weapon.damage_modifier | default: weapon_data.damage_modifier | default: 0 %}
+
+            {% if weapon_dice.size == 2 %}
+              {% for i in (1..weapon_dice[0]) %}
+                <i class="fad fa-dice-d{{weapon_dice[1]}}" style="padding-right: 0.125em"></i>
+              {% endfor %}
+            {% endif %}
+
+            {{weapon_damage}}
+            {% if damage_modifier > 0 %}
+              + {{damage_modifier}}
+            {% endif %}
+            {{weapon.damage_type | default: weapon_data.damage_type | downcase}}
+          </td>
+        </tr>
+        <tr>
+          <th style="text-align: left; border: 0; width: 30%; vertical-align: top;">To hit</th>
+          <td style="border: 0; vertical-align: top;">
+            <i class="fad fa-bullseye-arrow" style="padding-right: 0.125em"></i>
+            {% if to_hit >= 0 %}+{%- endif -%}{{to_hit}}
+          </td>
+        </tr>
+        <tr>
+          <th style="text-align: left; border: 0; width: 30%; vertical-align: top;">Properties</th>
+          <td style="border: 0; vertical-align: top;">
+            {% if weapon_data.properties and weapon_data.properties.size > 0 %}
+              {{weapon_data.properties | join: ", " | capitalize}}
+            {% else %}
+            —
+            {% endif %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <div class="tags">
+      <span class="tag">{{weapon.type}}</span>
+      <span class="tag">{{weapon.handedness}}</span>
+      <span class="tag">{{weapon.proficiency}}</span>
+      <span class="tag">{{weapon.price}} gp</span>
+      <span class="tag">{{weapon.weight}} lbs</span>
+      <span class="tag">{{weapon.property}}</span>
+    </div> -->
+    {{weapon.description | markdownify}}
+  {% endfor %}
+</div>

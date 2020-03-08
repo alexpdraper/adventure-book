@@ -1,0 +1,19 @@
+---
+layout: main
+breadcrumbs:
+  - label: Home
+    url: /
+    current: false
+---
+
+{% if page.breadcrumbs %}
+  {% assign breadcrumbs = page.breadcrumbs %}
+{% else %}
+  {% assign breadcrumbs = layout.breadcrumbs %}
+{% endif %}
+
+{% include breadcrumbs.html breadcrumbs=breadcrumbs %}
+
+<article class="article section">
+  {{content}}
+</article>

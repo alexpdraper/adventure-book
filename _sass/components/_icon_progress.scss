@@ -1,0 +1,11 @@
+icon-progress {
+  i {
+    cursor: pointer;
+    &:not(:first-child) {
+      padding-left: 0.125em;
+    }
+    &:not(:last-child) {
+      padding-right: 0.125em;
+    }
+  }
+}

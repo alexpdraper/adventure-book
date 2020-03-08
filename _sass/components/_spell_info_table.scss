@@ -1,0 +1,12 @@
+.spell-info-table {
+  width: 100%;
+  th,
+  td {
+    &:first-child {
+      text-align: left;
+    }
+    &:last-child {
+      text-align: right;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.article {
+  .spells-list {
+    font-size: 16px;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .spells-list-item {
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0.125rem;
+    width: 100%;
+    @media screen and (min-width: $breakpoint-md) {
+      width: calc(50% - 2em);
+    }
+    @media screen and (min-width: $breakpoint-lg) {
+      width: calc(33.33333% - 2em);
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        background: rgba(227, 207, 227, 0.35);
+        border-radius: 4px;
+      }
+    }
+  }
+}

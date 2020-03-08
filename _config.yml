@@ -1,0 +1,27 @@
+collections:
+  characters:
+    output: true
+    permalink: /:collection/:name
+  npcs:
+    output: true
+    permalink: /:collection/:name
+  spells:
+    output: true
+    permalink: /:collection/:name
+
+defaults:
+  - scope:
+      path: ""
+      type: characters
+    values:
+      layout: character
+  - scope:
+      path: ""
+      type: npcs
+    values:
+      layout: npc
+  - scope:
+      path: ""
+      type: spells
+    values:
+      layout: spell

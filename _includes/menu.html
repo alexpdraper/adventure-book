@@ -1,0 +1,19 @@
+<ul class="menu">
+  {% assign page_url = page.url | strip | remove: "/" | remove: ".html" %}
+  {% for item in include.items %}
+  {% assign normalized_url = item.url | strip | remove: "/" | remove: ".html" %}
+  <li class="menu-item">
+    {% if item.url %}
+      <a class="menu-item-link{% if normalized_url == page_url %} is-active{% endif %}" href="{{item.url}}">
+        {{item.title}}
+      </a>
+    {% else %}
+      <span class="menu-item-label">{{item.title}}</span>
+    {% endif %}
+
+    {% if item.children %}
+      {% include menu.html items=item.children %}
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

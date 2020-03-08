@@ -1,0 +1,16 @@
+{% assign proficiency_bonus = include.proficiency_bonus %}
+
+<div class="tags">
+  {% for skill in site.data.skills %}
+    {% assign skill_name = skill[0] %}
+    {% assign skill_ability = skill[1] %}
+
+    <span class="tag">
+      {% assign proficiency_points = include.skill_proficiencies[skill_name] | times: proficiency_bonus %}
+      {% assign score_modifier = include.ability_scores[skill_ability] | minus: 10 | divided_by: 2 | floor | plus: proficiency_points | floor %}
+      {{skill_name | replace: "_", " " | capitalize}}
+      <span style="opacity: 0.7; margin: 0 0.25em;">({{skill_ability | slice: 0, 3}})</span>
+      {%- if score_modifier >= 0 %}+{%- endif -%}{{score_modifier}}
+    </span>
+  {% endfor %}
+</div>

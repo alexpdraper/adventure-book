@@ -1,0 +1,16 @@
+{% assign last_crumb = include.breadcrumbs | last %}
+
+<nav class="breadcrumbs section-small">
+  {% for breadcrumb in include.breadcrumbs %}
+    {% if breadcrumb.current %}
+      <span>{{breadcrumb.label}}</span>
+    {% else %}
+      <a href="{{breadcrumb.url}}">{{breadcrumb.label}}</a>
+      <span class="breadcrumb-divider">/</span>
+    {% endif %}
+  {% endfor %}
+
+  {% unless last_crumb.current %}
+    <span>{{page.title}}</span>
+  {% endunless %}
+</nav>

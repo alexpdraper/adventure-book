@@ -1,0 +1,17 @@
+.main-layout {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  @media screen and (min-width: $breakpoint-md) {
+    flex-wrap: nowrap;
+    min-height: 100vh;
+  }
+}
+
+.main {
+  width: 100%;
+}
+
+@import "sidebar";
+@import "section";
+@import "columns";

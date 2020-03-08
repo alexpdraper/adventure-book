@@ -1,0 +1,17 @@
+main:
+  items:
+    - title: Home
+      url: /
+    - title: Characters
+      url: /characters
+      children:
+        - title: Jubilant
+          url: /characters/jubilant
+        - title: Kaden
+          url: /characters/kaden
+        - title: Sarahphina
+          url: /characters/sarahphina
+    - title: NPCs
+      url: /npcs
+    - title: Spells
+      url: /spells

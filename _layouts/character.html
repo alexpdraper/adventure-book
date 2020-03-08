@@ -1,0 +1,328 @@
+---
+layout: main
+breadcrumbs:
+  - label: Home
+    url: /
+    current: false
+  - label: Characters
+    url: /characters
+    current: false
+tabs:
+  - title: Profile
+    target: profile-tab
+    icon: fas fa-user
+  - title: Spells
+    target: spells-tab
+    icon: fad fa-wand-magic
+  - title: Features
+    target: features-tab
+    icon: fad fa-award
+  - title: Equipment
+    target: equipment-tab
+    icon: fad fa-sword
+  - title: Inventory
+    target: inventory-tab
+    icon: fad fa-flask-potion
+---
+
+{% include breadcrumbs.html breadcrumbs=layout.breadcrumbs %}
+
+{% assign character_level = 0 %}
+{% for class in page.classes %}
+  {% assign character_level = character_level | plus: class.level %}
+{% endfor %}
+
+{% assign proficiency_bonus = character_level | minus: 1 | times: 0.25 | floor | plus: 2 %}
+
+<article class="section">
+  <div class="columns">
+    <div class="column">
+      <div class="article">
+        <h1>{{page.title}}</h1>
+        {% for class in page.classes %}
+          <div style="margin-top: 0;">
+            <span class="icon" style="width: 1.25em; display: inline-block; color: #e1d0d0;">
+              {% if class.icon %}<i class="{{class.icon}}"></i>{% endif %}
+            </span>
+            {{class.title}}
+            {% if class.sub_class%}
+              ({{class.sub_class}})
+            {% endif %}
+            <span style="font-style: italic;">Level {{class.level}}</span>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Tabs -->
+      <div
+        id="character-tab-buttons"
+        class="tab-buttons"
+      >
+        {% for tab in layout.tabs %}
+          <button class="button is-rounded" data-target="{{tab.target}}" aria-label="{{tab.title}}">
+            <i class="{{tab.icon}}" aria-hidden="true"></i>
+          </button>
+        {% endfor %}
+      </div>
+
+      <!-- Spells -->
+      <div
+        id="spells-tab"
+        class="article"
+      >
+        <h3>Spells</h3>
+        <div id="spell-classes-tab-buttons" class="tab-buttons">
+          {% if page.classes %}
+            {% for class in page.classes %}
+              {% if class.spells %}
+                <button
+                  class="button is-rounded"
+                  aria-label="{{class.title}}"
+                  data-target="{{class.title}}-spells-tab"
+                >
+                  {% if class.icon %}
+                    <i class="{{class.icon}}" aria-hidden="true"></i>
+                  {% else %}
+                    {{class.title}}
+                  {% endif %}
+                </button>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        {% if page.classes %}
+          {% for class in page.classes %}
+            {% if class.spells %}
+              <div id="{{class.title}}-spells-tab">
+                {% include character_spells.html spells=class.spells %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <!-- Profile -->
+      <div id="profile-tab" class="article" style="display: none;">
+        <h3>Profile</h3>
+
+        {% if page.img_url %}
+          <img src="{{page.img_url}}">
+        {% endif %}
+
+        <h4>Ideal</h4>
+        <p>{{page.ideal}}</p>
+        <h4>Bond</h4>
+        <p>{{page.bond}}</p>
+        <h4>Flaw</h4>
+        <p>{{page.flaw}}</p>
+      </div>
+
+      <!-- Features -->
+      <div id="features-tab" class="article">
+        <h3>Features</h3>
+        <div id="features-classes-tab-buttons" class="tab-buttons">
+          {% if page.classes %}
+            {% for class in page.classes %}
+              {% if class.features %}
+                <button
+                  class="button is-rounded"
+                  aria-label="{{class.title}}"
+                  data-target="{{class.title}}-features-tab"
+                >
+                  {% if class.icon %}
+                    <i class="{{class.icon}}" aria-hidden="true"></i>
+                  {% else %}
+                    {{class.title}}
+                  {% endif %}
+                </button>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        {% if page.classes %}
+          {% for class in page.classes %}
+            {% if class.features %}
+              <div id="{{class.title}}-features-tab">
+                {% for feature in class.features %}
+                  <div class="character-spells">
+                    <details>
+                      <summary class="h5">
+                        {{feature.title}}
+                        {% if feature.charges %}
+                        <span class="icon" style="padding: 0 0.25em;"><i class="fad fa-sun"></i></span>
+                        &times;<span id="feature-charges-total-{{feature.title | slugify}}">{{feature.charges}}</span>
+                        {% endif %}
+                      </summary>
+                      {% if feature.charges %}
+                        <div style="margin-top: 0.5rem;">
+                          <icon-progress
+                            data-updates="feature-charges-total-{{feature.title | slugify}}"
+                            icon="fad fa-sun"
+                            max="{{feature.charges}}"
+                            value="{{feature.charges}}"
+                          ></icon-progress>
+                        </div>
+                      {% endif %}
+                      {% if feature.description %}
+                        <div class="article spell-details">
+                          {{feature.description | markdownify}}
+                        </div>
+                      {% endif %}
+                    </details>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <!-- Equipment -->
+      <div id="equipment-tab" class="article" style="display: none;">
+        <h3>Equipment</h3>
+
+        {% if page.equipment and page.equipment.weapons %}
+          <h4>Weapons</h4>
+          {%
+            include weapons_list.html
+            strength=page.ability_scores.strength
+            dexterity=page.ability_scores.dexterity
+            dexterity=page.ability_scores.dexterity
+            proficiency_bonus=proficiency_bonus
+            weapons=page.equipment.weapons
+          %}
+        {% endif %}
+        {% if page.equipment and page.equipment.armor %}
+        {% endif %}
+      </div>
+
+      <!-- Inventory -->
+      <div id="inventory-tab" class="article" style="display: none;">
+        <h3>Inventory</h3>
+      </div>
+    </div>
+
+    <div class="column narrower">
+      <div class="article">
+        <h2>HP: {{page.hit_point_max}}/{{page.hit_point_max}}</h2>
+
+        <div class="tags">
+          <span class="tag">
+            Level:&nbsp;<strong>{{character_level}}</strong>
+          </span>
+          <span class="tag">
+            Proficiency bonus:&nbsp;<strong>{{proficiency_bonus}}</strong>
+          </span>
+          <span class="tag">
+            AC:&nbsp;<strong>{{page.ac | default: page.ability_scores.dexterity}}</strong>
+          </span>
+        </div>
+
+        <div>
+          <p class="h4">Hit dice</p>
+          {% for class in page.classes %}
+            <div>
+              {% assign dice_type = class.hit_dice_type | default: "d6" %}
+              <span class="h5" style="display: inline-block; min-width: 3em;">
+                {{dice_type | upcase}}
+              </span>
+              <icon-progress icon="fad fa-dice-{{dice_type}}" max="{{class.level}}" value="{{class.level}}"></icon-progress>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if page.spell_slots %}
+          <h3>Spell slots</h3>
+          <div>
+          {% for slot in page.spell_slots %}
+            <div style="display: flex; justify-content: space-between;">
+              <span>
+                Level {{slot.level}}
+              </span>
+              <span>
+                <icon-progress icon="fad fa-sun" max="{{slot.slots}}" value="{{slot.slots}}"></icon-progress>
+              </span>
+            </div>
+          {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if page.ability_scores %}
+          <h3>Ability scores</h3>
+          {% include ability-scores-table.html ability_scores=page.ability_scores %}
+        {% endif %}
+
+        {% if page.skill_proficiencies %}
+          <h3>Skills</h3>
+          {%
+            include skill_proficiencies.html
+            ability_scores=page.ability_scores
+            proficiency_bonus=proficiency_bonus
+            skill_proficiencies=page.skill_proficiencies
+          %}
+        {% endif %}
+
+        {{content}}
+      </div>
+    </div>
+  </div>
+</article>
+
+<script>
+  domReady(function () {
+    var updaters = document.querySelectorAll('icon-progress[data-updates]');
+    for (var i = 0; i < updaters.length; i++) {
+      updaters[i].addEventListener('value-changed', function (event) {
+        var toUpdate = document.getElementById(this.dataset.updates);
+        if (toUpdate) {
+          toUpdate.textContent = event.detail;
+        }
+      });
+    }
+  });
+
+  domReady(function () {
+    function resetButtons(buttons) {
+      for (var i = 0; i < buttons.length; i++) {
+        resetButton(buttons[i]);
+      }
+    }
+
+    function resetButton(button) {
+      var target = document.getElementById(button.dataset.target);
+      if (target) target.style.display = 'none';
+      if (button.classList.contains('is-active')) button.classList.remove('is-active');
+      if (button.classList.contains('is-primary')) button.classList.remove('is-primary');
+    }
+
+    function setActiveTab(button) {
+      var target = document.getElementById(button.dataset.target);
+      if (target) target.style.display = '';
+      if (!button.classList.contains('is-active')) button.classList.add('is-active');
+      if (!button.classList.contains('is-primary')) button.classList.add('is-primary');
+    }
+
+    function activateTabButtons(container) {
+      if (!container) return;
+
+      var buttons = container.querySelectorAll('[data-target]');
+      if (!buttons.length) return;
+
+      resetButtons(buttons);
+      setActiveTab(buttons[0]);
+
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function (event) {
+          resetButtons(buttons);
+          setActiveTab(this);
+        });
+      }
+    }
+
+    activateTabButtons(document.getElementById('spell-classes-tab-buttons'));
+    activateTabButtons(document.getElementById('features-classes-tab-buttons'));
+    activateTabButtons(document.getElementById('character-tab-buttons'));
+  });
+</script>

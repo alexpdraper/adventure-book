@@ -1,0 +1,14 @@
+---
+layout: base
+---
+
+{% assign menu_items = site.data.navigation.main.items %}
+
+<div class="main-layout">
+  <aside class="sidebar">
+    {% include menu.html items=menu_items %}
+  </aside>
+  <main class="main">
+    {{content}}
+  </main>
+</div>
