@@ -1,0 +1,124 @@
+# Light
+- title: Padded
+  type: light
+  cost: 5
+  ac: 11
+  strength_requirement: false
+  stealth_disadvantage: true
+  weight: 8
+  description: |
+    Padded armor consists of quilted layers of cloth and batting. AC: 11 + Dex modifier.
+- title: Leather
+  type: light
+  cost: 10
+  ac: 11
+  strength_requirement: false
+  stealth_disadvantage: false
+  weight: 10
+  description: |
+    The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials. AC: 11 + Dex modifier.
+- title: Studded leather
+  type: light
+  cost: 45
+  ac: 12
+  strength_requirement: false
+  stealth_disadvantage: false
+  weight: 10
+  description: |
+    Made from tough but flexible leather, studded leather is reinforced with close-set rivets or spikes. AC: 12 + Dex modifier.
+
+# Medium
+- title: Hide
+  type: medium
+  cost: 10
+  ac: 12
+  strength_requirement: false
+  stealth_disadvantage: false
+  weight: 12
+  description: |
+    This crude armor consists of thick furs and pelts. It is commonly worn by barbarian tribes, evil humanoids, and other folk who lack access to the tools and materials needed to create better armor. AC: 12 + Dex modifier (max 2).
+- title: Chain shirt
+  type: medium
+  cost: 50
+  ac: 13
+  strength_requirement: false
+  stealth_disadvantage: false
+  weight: 20
+  description: |
+    Made of interlocking metal rings, a chain shirt is worn between layers of clothing or leather. This armor offers modest protection to the wearer’s upper body and allows the sound of the rings rubbing against one another to be muffled by outer layers. AC: 13 + Dex modifier (max 2).
+- title: Scale mail
+  type: medium
+  cost: 50
+  ac: 14
+  strength_requirement: false
+  stealth_disadvantage: true
+  weight: 45
+  description: |
+    This armor consists of a coat and leggings (and perhaps a separate skirt) of leather covered with overlapping pieces of metal, much like the scales of a fish. The suit includes gauntlets. AC: 14 + Dex modifier (max 2).
+- title: Breastplate
+  type: medium
+  cost: 400
+  ac: 14
+  strength_requirement: false
+  stealth_disadvantage: false
+  weight: 20
+  description: |
+    This armor consists of a fitted metal chest piece worn with supple leather. Although it leaves the legs and arms relatively unprotected, this armor provides good protection for the wearer’s vital organs while leaving the wearer relatively unencumbered. AC: 14 + Dex modifier (max 2).
+- title: Half plate
+  type: medium
+  cost: 750
+  ac: 15
+  strength_requirement: false
+  stealth_disadvantage: true
+  weight: 40
+  description: |
+    Half plate consists of shaped metal plates that cover most of the wearer’s body. It does not include leg protection beyond simple greaves that are attached with leather straps. AC: 15 + Dex modifier (max 2).
+
+# Heavy
+- title: Ring mail
+  type: heavy
+  cost: 30
+  ac: 14
+  strength_requirement: false
+  stealth_disadvantage: true
+  weight: 40
+  description: |
+    This armor is leather armor with heavy rings sewn into it. The rings help reinforce the armor against blows from swords and axes. Ring mail is inferior to chain mail, and it’s usually worn only by those who can’t afford better armor.
+- title: Chain mail
+  type: heavy
+  cost: 75
+  ac: 16
+  strength_requirement: 13
+  stealth_disadvantage: true
+  weight: 55
+  description: |
+    Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath the mail to prevent chafing and to cushion the impact of blows. The suit includes gauntlets.
+- title: Splint
+  type: heavy
+  cost: 200
+  ac: 17
+  strength_requirement: 15
+  stealth_disadvantage: true
+  weight: 60
+  description: |
+    This armor is made of narrow vertical strips of metal riveted to a backing of leather that is worn over cloth padding. Flexible chain mail protects the joints.
+- title: Plate
+  type: heavy
+  cost: 1500
+  ac: 18
+  strength_requirement: 15
+  stealth_disadvantage: true
+  weight: 65
+  description: |
+    Plate consists of shaped, interlocking metal plates to cover the entire body. A suit of plate includes gauntlets, heavy leather boots, a visored helmet, and thick layers of padding underneath the armor. Buckles and straps distribute the weight over the body.
+
+# Shield
+- title: Shield
+  type: shield
+  cost: 10
+  ac: 2
+  strength_requirement: false
+  stealth_disadvantage: false
+  weight: 6
+  description: |
+    A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.

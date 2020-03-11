@@ -210,19 +210,21 @@ equipment:
     - extends: Javelin
       quantity: 5
   armor:
-    - title: Phoenix Plate
-      type: Heavy
+    - extends: Plate
+      title: Phoenix Plate
       magical_modifier: 1
       price: 5000
-      weight: 65
-      armor_class: 19
-      stealth: Disadvantage
       description: |
-        Plate consists of shaped, interlocking metal plates to cover the entire body. A suit of plate includes gauntlets, heavy leather boots, a visored helmet, and thick layers of padding underneath the armour. Buckles and straps distribute the weight over the body.
+        Anytime I am hit with a melee attack while wearing the armor, the attacker makes a DC 15 Dexterity saving throw. They take 1d4 damage on a failed save, and half that on a success.
 
-        Anytime I am hit with a melee attack while wearing the armour, the attacker makes a DC 15 Dexterity saving throw. They take 1d4 damage on a failed save, and half that on a success.
+        If I die wearing the armor, I am revived to half health, but the magical fire of the armor is burnt away.
+    - extends: Shield
+      title: Shield of Heroic Memories
+      cost: 1200
+      description: |
+        A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.
 
-        If I die wearing the armour, I am revived to half health, but the magical fire of the armour is burnt away.
+        This perfectly round silver shield initially has a mirror finish. As a hero takes it into battle, it remembers the enemies encountered, gaining a +1 AC on any subsequent battle with creatures of that type. The events of the battle are intricately engraved onto the shield’s surface.
 weapon_proficiencies:
   simple:
     melee: true
@@ -235,14 +237,14 @@ skill_proficiencies:
   animal_handling: 0.5
   arcana: 0.5
   athletics: 0.5
-  deception: 0.5
+  deception: 1
   history: 1
   insight: 1
-  intimidation: 0.5
+  intimidation: 1
   investigation: 0.5
-  medicine: 0.5
-  nature: 1
-  perception: 1
+  medicine: 1
+  nature: 2
+  perception: 2
   performance: 0.5
   persuasion: 1
   religion: 0.5

@@ -1,16 +1,21 @@
 .details {
-  border-top: 1px solid $text-color;
   margin: 0;
-  &:last-child {
-    border-bottom: 1px solid $text-color;
-  }
 
   summary {
-    padding: 5px;
+    padding: 0;
     font-size: 0.7rem;
-    display: flex;
+    display: block;
     cursor: pointer;
     width: 100%;
+    list-style: none;
+    border-radius: 3px;
+    .summary {
+      padding: 5px;
+      display: flex;
+    }
+    &::-webkit-details-marker {
+      display: none;
+    }
     .arrow-icon {
       transform: rotateZ(0deg);
       transition: transform 0.2s ease;

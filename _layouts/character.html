@@ -51,6 +51,24 @@ tabs:
             <span style="font-style: italic;">Level {{class.level}}</span>
           </div>
         {% endfor %}
+
+        <div class="tags">
+          <span class="tag">
+            <span class="icon">
+              <i class="far fa-level-up"></i>
+            </span>&nbsp;Level:&nbsp;<strong>{{character_level}}</strong>
+          </span>
+          <span class="tag">
+            <span class="icon">
+              <i class="fad fa-scroll-old"></i>
+            </span>&nbsp;Proficiency bonus:&nbsp;<strong>{{proficiency_bonus}}</strong>
+          </span>
+          <span class="tag">
+            <span class="icon">
+              <i class="fad fa-shield"></i>
+            </span>&nbsp;AC:&nbsp;<strong>{{page.ac | default: page.ability_scores.dexterity}}</strong>
+          </span>
+        </div>
       </div>
 
       <!-- Tabs -->
@@ -199,16 +217,18 @@ tabs:
                 {% for feature in class.features %}
                   <details class="details">
                     <summary>
-                      <div class="arrow-icon">
-                        <i class="fal fa-chevron-right"></i>
+                      <div class="summary">
+                        <div class="arrow-icon">
+                          <i class="fal fa-chevron-right"></i>
+                        </div>
+                        <div class="title">
+                          {{feature.title}}
+                        </div>
+                        {% if feature.charges %}
+                        <span class="icon" style="padding: 0 0.25em;"><i class="fad fa-sun"></i></span>
+                        &times;<span id="feature-charges-total-{{feature.title | slugify}}">{{feature.charges}}</span>
+                        {% endif %}
                       </div>
-                      <div class="title">
-                        {{feature.title}}
-                      </div>
-                      {% if feature.charges %}
-                      <span class="icon" style="padding: 0 0.25em;"><i class="fad fa-sun"></i></span>
-                      &times;<span id="feature-charges-total-{{feature.title | slugify}}">{{feature.charges}}</span>
-                      {% endif %}
                     </summary>
                     <div class="info article">
                       {% if feature.charges %}
@@ -246,7 +266,15 @@ tabs:
             weapons=page.equipment.weapons
           %}
         {% endif %}
+
         {% if page.equipment and page.equipment.armor %}
+          <h4>Armor</h4>
+          {%
+            include armor_list.html
+            strength=page.ability_scores.strength
+            dexterity=page.ability_scores.dexterity
+            armor=page.equipment.armor
+          %}
         {% endif %}
       </div>
 
@@ -260,24 +288,12 @@ tabs:
       <div class="article">
         <h2>{{page.hit_point_max}}/{{page.hit_point_max}}</h2>
 
-        <div class="tags">
-          <span class="tag">
-            Level:&nbsp;<strong>{{character_level}}</strong>
-          </span>
-          <span class="tag">
-            Proficiency bonus:&nbsp;<strong>{{proficiency_bonus}}</strong>
-          </span>
-          <span class="tag">
-            AC:&nbsp;<strong>{{page.ac | default: page.ability_scores.dexterity}}</strong>
-          </span>
-        </div>
-
         <div>
           <p class="h4">Hit dice</p>
           {% for class in page.classes %}
             <div>
               {% assign dice_type = class.hit_dice_type | default: "d6" %}
-              <span class="h5" style="display: inline-block; min-width: 3em;">
+              <span class="h5" style="display: inline-block; min-width: 2.25em;">
                 {{dice_type | upcase}}
               </span>
               <icon-progress icon="fad fa-dice-{{dice_type}}" max="{{class.level}}" value="{{class.level}}"></icon-progress>
@@ -304,6 +320,23 @@ tabs:
         {% if page.ability_scores %}
           <h3>Ability scores</h3>
           {% include ability-scores-table.html ability_scores=page.ability_scores %}
+
+          <h4>Saving throws</h4>
+          {% assign ability_names = "strength,dexterity,constitution,intelligence,wisdom,charisma" | split: "," %}
+          <div class="tags">
+            {% for ability_name in ability_names %}
+              {% assign ability_score = page.ability_scores[ability_name] %}
+              {% assign score_modifier = ability_score | minus: 10 | divided_by: 2 | floor %}
+
+              {% if page.saving_throw_proficiencies and page.saving_throw_proficiencies[ability_name] %}
+                {% assign bonus_score = page.saving_throw_proficiencies[ability_name] | times: proficiency_bonus | floor %}
+                {% assign score_modifier = score_modifier | plus: bonus_score %}
+              {% endif %}
+              <span class="tag">
+                {{ability_name | capitalize}}:&nbsp;<strong>{% if score_modifier >= 0 %}+{%- endif -%}{{score_modifier}}</strong>
+              </span>
+            {% endfor %}
+          </div>
         {% endif %}
 
         {% if page.skill_proficiencies %}

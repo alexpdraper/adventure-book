@@ -40,48 +40,50 @@ includes:
 
   <details class="details">
     <summary>
-      <div class="arrow-icon">
-        <i class="fal fa-chevron-right"></i>
-      </div>
-      <div style="display: flex; justify-content: space-between; width: 100%;">
-        <div class="title">
-          {%- assign weapon_icon = weapon.icon | default: weapon_data.icon | default: "fad fa-swords" -%}
-          <span class="icon weapon-icon"><i class="{{weapon_icon}}"></i></span>
-          {{weapon.title | default: weapon_data.title}}
-
-          {% assign weapon_quantity = weapon.quantity | default: 1 %}
-          {% if weapon_quantity > 1%}
-            &times;{{weapon.quantity | default: 1}}
-          {% endif %}
+      <div class="summary">
+        <div class="arrow-icon">
+          <i class="fal fa-chevron-right"></i>
         </div>
+        <div style="display: flex; justify-content: space-between; width: 100%;">
+          <div class="title">
+            {%- assign weapon_icon = weapon.icon | default: weapon_data.icon | default: "fad fa-swords" -%}
+            <span class="icon weapon-icon"><i class="{{weapon_icon}}"></i></span>
+            {{weapon.title | default: weapon_data.title}}
 
-        <div style="display: flex; justify-content: space-between;">
-          <span>
-            {% assign weapon_dice = weapon_damage | split: "d" %}
-            {% assign damage_modifier = weapon.damage_modifier | default: weapon_data.damage_modifier | default: 0 %}
-
-            {% if weapon_dice.size == 2 %}
-              <span>
-                {% for i in (1..weapon_dice[0]) %}
-                  <i class="fad fa-dice-d{{weapon_dice[1]}}" style="padding-right: 0.125em"></i>
-                {% endfor %}
-              </span>
+            {% assign weapon_quantity = weapon.quantity | default: 1 %}
+            {% if weapon_quantity > 1%}
+              &times;{{weapon.quantity | default: 1}}
             {% endif %}
+          </div>
 
-            <span style="display: inline-block; min-width: 4em; margin-left: 0.5em;">
-              {{weapon_damage}}
-              {% if damage_modifier > 0 %}
-                + {{damage_modifier}}
+          <div style="display: flex; justify-content: space-between;">
+            <span>
+              {% assign weapon_dice = weapon_damage | split: "d" %}
+              {% assign damage_modifier = weapon.damage_modifier | default: weapon_data.damage_modifier | default: 0 %}
+
+              {% if weapon_dice.size == 2 %}
+                <span>
+                  {% for i in (1..weapon_dice[0]) %}
+                    <i class="fad fa-dice-d{{weapon_dice[1]}}" style="padding-right: 0.125em"></i>
+                  {% endfor %}
+                </span>
               {% endif %}
-            </span>
-          </span>
 
-          <span style="display: flex; min-width: 3em; justify-content: space-between; margin-left: 0.5rem;">
-            <span style="display: inline-block; padding-right: 0.25em;">
-              <i class="fad fa-bullseye-arrow"></i>
+              <span style="display: inline-block; min-width: 4em; margin-left: 0.5em;">
+                {{weapon_damage}}
+                {% if damage_modifier > 0 %}
+                  + {{damage_modifier}}
+                {% endif %}
+              </span>
             </span>
-            {% if to_hit >= 0 %}+{%- endif -%}{{to_hit}}
-          </span>
+
+            <span style="display: flex; min-width: 3em; justify-content: space-between; margin-left: 0.5rem;">
+              <span style="display: inline-block; padding-right: 0.25em;">
+                <i class="fad fa-bullseye-arrow"></i>
+              </span>
+              {% if to_hit >= 0 %}+{%- endif -%}{{to_hit}}
+            </span>
+          </div>
         </div>
       </div>
     </summary>

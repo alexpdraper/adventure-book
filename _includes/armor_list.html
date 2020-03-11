@@ -1,0 +1,88 @@
+{%- comment -%}
+includes:
+  - strength
+  - dexterity
+  - armor
+{%- endcomment -%}
+
+{% assign dex_modifier = include.dexterity | minus: 10 | divided_by: 2 | floor %}
+
+<div class="article armor-list">
+  {% for armor in include.armor %}
+    {% assign armor_data = site.data.armor | where: "title", armor.extends | first %}
+    {% assign armor_type = armor.type | default: armor_data.type %}
+    {% assign ac_modifier = armor.magical_modifier | default: armor_data.magical_modifier | default: 0 %}
+    {% assign base_ac = armor.ac | default: armor_data.ac %}
+    {% assign base_ac = base_ac | plus: ac_modifier %}
+    {% assign ac_total = base_ac %}
+
+    {% if armor_type == "light" %}
+      {% assign ac_total = ac_total | plus: dex_modifier %}
+    {% elsif armor_type == "medium" %}
+      {% if dex_modifier > 2 %}
+        {% assign ac_total = ac_total | plus: 2 %}
+      {% else %}
+        {% assign ac_total = ac_total | plus: dex_modifier %}
+      {% endif %}
+    {% endif %}
+
+    <details class="details">
+      <summary>
+        <div class="summary">
+          <div class="arrow-icon">
+            <i class="fal fa-chevron-right"></i>
+          </div>
+
+          <div style="width: 100%; display: flex; justify-content: space-between;">
+            <div class="title">
+              {{armor.title | default: armor_data.title}}
+            </div>
+            <div style="min-width: 3em; display: flex; justify-content: space-between; margin-left: 0.5em;">
+              {% if armor_type == "shield" %}
+                <span class="icon"><i class="fad fa-shield"></i></span>
+              {% else %}
+                <span class="icon"><i class="fad fa-helmet-battle"></i></span>
+              {% endif %}
+              {{ac_total}}
+            </div>
+          </div>
+        </div>
+      </summary>
+
+      <table style="width: 100%;" class="is-borderless">
+        <tbody>
+          <tr>
+            <th style="text-align: left; width: 30%;">AC</th>
+            <td>
+              {{base_ac}}
+              {% if armor_type == "light" %}
+                + Dex modifier
+              {% elsif armor_type == "medium" %}
+                + Dex modifier (max 2)
+              {% endif %}
+            </td>
+          </tr>
+          <tr>
+            <th style="text-align: left; width: 30%;">Type</th>
+            <td>{{armor_type | capitalize}}</td>
+          </tr>
+          <tr>
+            <th style="text-align: left; width: 30%;">Cost</th>
+            <td>{{armor.cost | default: armor_data.cost}} GP</td>
+          </tr>
+          <tr>
+            <th style="text-align: left; width: 30%;">Weight</th>
+            <td>{{armor.weight | default: armor_data.weight}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      {% assign description = armor.description | default: armor_data.description %}
+      {% if description %}
+        <div class="article info">
+          {{description | markdownify}}
+        </div>
+      {% endif %}
+    </details>
+  {% endfor %}
+</div>
