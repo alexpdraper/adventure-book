@@ -1,0 +1,43 @@
+.details {
+  border-top: 1px solid $text-color;
+  margin: 0;
+  &:last-child {
+    border-bottom: 1px solid $text-color;
+  }
+
+  summary {
+    padding: 5px;
+    font-size: 0.7rem;
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    .arrow-icon {
+      transform: rotateZ(0deg);
+      transition: transform 0.2s ease;
+      display: block;
+      width: 1.15em;
+      text-align: center;
+      margin-right: 0.25em;
+    }
+    .title {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-family: $headings-font-family;
+      font-weight: $headings-font-weight;
+    }
+  }
+
+  &[open] summary,
+  summary:hover {
+    background-color: $secondary-color;
+    background-image: url('/assets/images/pink-stardust.png');
+  }
+
+  &[open] summary .arrow-icon {
+    transform: rotateZ(90deg);
+  }
+
+  .info {
+    margin: 0.5rem 0.25rem;
+  }
+}

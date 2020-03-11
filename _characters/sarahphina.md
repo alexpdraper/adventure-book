@@ -1,11 +1,15 @@
 ---
 title: Saraphina
 alignment: Lawful Good
-class: Wizard (Enchantress)
 race: High Elf
 background: Entertainer (Poet)
 level: 3
 hit_point_max: 16
+ac: 13
+gender: Female
+age: 121
+weight: 99 lb
+height: "4' 9\""
 proficiencies:
   - Lyre
   - Disguise kit
@@ -47,16 +51,41 @@ ability_scores:
   intelligence: 17
   wisdom: 11
   charisma: 14
+equipment:
+  weapons:
+    - extends: Shortsword
+      title: Shortsword + 1
+      damage_modifier: 1
+      to_hit_modifier: 1
+    - extends: Longbow
 spell_slots:
   - level: 1
     slots: 4
   - level: 2
     slots: 2
+weapon_proficiencies:
+  simple:
+    melee: false
+    ranged: false
+  martial:
+    melee: false
+    ranged: false
+  longsword: true
+  shortsword: true
+  longbow: true
+  shortbow: true
+  dagger: true
+  dart: true
+  sling: true
+  quarterstaff: true
+  "crossbow, light": true
 classes:
   - title: Wizard
     sub_class: Enchantress
     icon: fad fa-hand-holding-magic
     level: 3
+    hit_dice_type: d6
+    spellcasting_ability: intelligence
     spells:
       - Mage Hand
       - Friends

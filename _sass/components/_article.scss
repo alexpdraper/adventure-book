@@ -156,5 +156,12 @@ $breakpoint-xl: 1200px;
         border-bottom: 0;
       }
     }
+
+    &.is-borderless {
+      td,
+      th {
+        border: 0;
+      }
+    }
   }
 }

@@ -18,6 +18,9 @@ classes:
     spells:
       - Speak with Animals (ritual)
       - Zephyr Strike
+equipment:
+  weapons:
+    - extends: Warhammer
 ability_scores:
   strength: 19
   dexterity: 13
@@ -45,3 +48,5 @@ skill_proficiencies:
   stealth: 0
   survival: 0
 ---
+
+A ghostwise halfling living with his dog, Robyn, in the woods. He draws power from his deep connection to the woods, which he uses to protect them from people who would disturb the balance.

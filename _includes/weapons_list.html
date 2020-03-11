@@ -3,6 +3,7 @@ includes:
   - strength
   - dexterity
   - proficiency_bonus
+  - weapon_proficiencies
   - weapons
 {%- endcomment -%}
 
@@ -10,11 +11,15 @@ includes:
 {% assign dex_modifier = include.dexterity | minus: 10 | divided_by: 2 | floor %}
 {% assign finesse_modifier = strength_modifier | at_least: dex_modifier %}
 
-<div class="article">
+<div class="article weapons-list">
   {% for weapon in include.weapons %}
     {% assign weapon_data = site.data.weapons | where: "title", weapon.extends | first %}
     {% assign to_hit = weapon.to_hit_modifier | default: weapon_data.to_hit_modifier | default: 0 %}
-    {% assign to_hit = to_hit | plus: include.proficiency_bonus %}
+    {% assign lower_name = weapon_data.title | downcase %}
+
+    {% if include.weapon_proficiencies[weapon_data.proficiency][weapon_data.type] or include.weapon_proficiencies[lower_name] %}
+      {% assign to_hit = to_hit | plus: include.proficiency_bonus %}
+    {% endif %}
 
     {% assign finesse = false %}
     {% for property in weapon_data.properties %}
@@ -33,25 +38,54 @@ includes:
 
     {% assign weapon_damage = weapon.damage | default: weapon_data.damage %}
 
-    {%- comment -%}
-    <p style="margin-bottom: 0.25em">
-      {%- assign weapon_icon = weapon.icon | default: weapon_data.icon | default: "fad fa-swords" -%}
-      <span class="icon" style="padding-right: 0.25em;"><i class="{{weapon_icon}}"></i></span>
-      {{weapon.title | default: weapon_data.title}}
-      &times;{{weapon.quantity | default: 1}}
-    </p>
-    {%- endcomment -%}
-    <table style="width: 100%; margin-bottom: 1rem;">
-      <thead>
-        <tr style="text-align: left;">
-          <th colspan="2" style="border-top: 1px solid #4f3015; background-color: #e1d0d0; background-image: url('/assets/images/pink-stardust.png')">
-            {%- assign weapon_icon = weapon.icon | default: weapon_data.icon | default: "fad fa-swords" -%}
-            <span class="icon" style="padding-right: 0.25em;"><i class="{{weapon_icon}}"></i></span>
-            {{weapon.title | default: weapon_data.title}}
+  <details class="details">
+    <summary>
+      <div class="arrow-icon">
+        <i class="fal fa-chevron-right"></i>
+      </div>
+      <div style="display: flex; justify-content: space-between; width: 100%;">
+        <div class="title">
+          {%- assign weapon_icon = weapon.icon | default: weapon_data.icon | default: "fad fa-swords" -%}
+          <span class="icon weapon-icon"><i class="{{weapon_icon}}"></i></span>
+          {{weapon.title | default: weapon_data.title}}
+
+          {% assign weapon_quantity = weapon.quantity | default: 1 %}
+          {% if weapon_quantity > 1%}
             &times;{{weapon.quantity | default: 1}}
-          </th>
-        </tr>
-      </thead>
+          {% endif %}
+        </div>
+
+        <div style="display: flex; justify-content: space-between;">
+          <span>
+            {% assign weapon_dice = weapon_damage | split: "d" %}
+            {% assign damage_modifier = weapon.damage_modifier | default: weapon_data.damage_modifier | default: 0 %}
+
+            {% if weapon_dice.size == 2 %}
+              <span>
+                {% for i in (1..weapon_dice[0]) %}
+                  <i class="fad fa-dice-d{{weapon_dice[1]}}" style="padding-right: 0.125em"></i>
+                {% endfor %}
+              </span>
+            {% endif %}
+
+            <span style="display: inline-block; min-width: 4em; margin-left: 0.5em;">
+              {{weapon_damage}}
+              {% if damage_modifier > 0 %}
+                + {{damage_modifier}}
+              {% endif %}
+            </span>
+          </span>
+
+          <span style="display: flex; min-width: 3em; justify-content: space-between; margin-left: 0.5rem;">
+            <span style="display: inline-block; padding-right: 0.25em;">
+              <i class="fad fa-bullseye-arrow"></i>
+            </span>
+            {% if to_hit >= 0 %}+{%- endif -%}{{to_hit}}
+          </span>
+        </div>
+      </div>
+    </summary>
+    <table style="width: 100%">
       <tbody>
         <tr>
           <th style="text-align: left; border: 0; width: 30%; vertical-align: top;">Damage</th>
@@ -91,14 +125,11 @@ includes:
         </tr>
       </tbody>
     </table>
-    <!-- <div class="tags">
-      <span class="tag">{{weapon.type}}</span>
-      <span class="tag">{{weapon.handedness}}</span>
-      <span class="tag">{{weapon.proficiency}}</span>
-      <span class="tag">{{weapon.price}} gp</span>
-      <span class="tag">{{weapon.weight}} lbs</span>
-      <span class="tag">{{weapon.property}}</span>
-    </div> -->
-    {{weapon.description | markdownify}}
+    {% if weapon.description %}
+      <div class="info article">
+        {{weapon.description | markdownify}}
+      </div>
+    {% endif %}
+  </details>
   {% endfor %}
 </div>

@@ -13,16 +13,24 @@
   {% else %}
     <h4>Level {{spell_level.name}}</h4>
   {% endif %}
-    {% assign spells = spell_level.items | sort: "name" %}
-    {% for spell in spells %}
-    <div class="character-spells">
-      <details>
-        <summary class="h5">{{spell.name}}</summary>
-        <div class="article spell-details">
-          {% include spell_info_table.html spell=spell %}
-          {{spell.content | markdownify}}
+
+  {% assign spells = spell_level.items | sort: "name" %}
+  {% for spell in spells %}
+    <details class="details">
+      <summary>
+        <div class="arrow-icon">
+          <i class="fal fa-chevron-right"></i>
         </div>
-      </details>
-    </div>
-    {% endfor %}
+        <div class="title">
+          {{spell.name}}
+        </div>
+      </summary>
+      <div style="margin-top: 0.125em;">
+        {% include spell_info_table.html spell=spell %}
+      </div>
+      <div class="article info">
+        {{spell.content | markdownify}}
+      </div>
+    </details>
+  {% endfor %}
 {% endfor %}

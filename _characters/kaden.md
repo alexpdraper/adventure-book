@@ -1,25 +1,31 @@
 ---
 title: Kaden Gracefulheart
 alignment: Neutral Good
-class: Paladin (Oath of the Ancients)
 race: Human
 background: Noble
-hit_point_max: 106
+deity: Eldath
+gender: Male
+age: 31
+height: "5' 8\""
+weight: 170 lbs
+hit_point_max: 96
 ac: 25
+img_url: "/assets/images/kaden-profile.jpg"
 proficiencies:
   - Lyre
   - Disguise kit
 features:
   - By popular demand
-ideal: ""
+ideal: "**Freedom**. Tyrants must not be allowed to oppress the people."
 bond: ""
-flaw: ""
+flaw: I hide a truly scandalous secret that could ruin my family forever.
 classes:
   - title: Paladin
     sub_class: Oath of the Ancients
     icon: fad fa-shield-cross
-    level: 9
+    level: 8
     hit_dice_type: d10
+    spellcasting_ability: charisma
     features:
       - title: Divine Sense
         description: |
@@ -51,13 +57,13 @@ classes:
 
           Your choice grants you features at 3rd level and again at 7th, 15th, and 20th level. Those features include oath spells and the Channel Divinity feature.
 
-          Oath Spells
+          #### Oath Spells
 
           Each oath has a list of associated spells. You gain access to these spells at the levels specified in the oath description. Once you gain access to an oath spell, you always have it prepared. Oath spells don't count against the number of spells you can prepare each day.
 
           If you gain an oath spell that doesn't appear on the paladin spell list, the spell is nonetheless a paladin spell for you.
 
-          Channel Divinity
+          #### Channel Divinity
 
           Your oath allows you to channel divine energy to fuel magical effects. Each Channel Divinity option provided by your oath explains how to use it.
 
@@ -71,13 +77,13 @@ classes:
           Starting at 6th level, whenever you or a friendly creature within 10 feet of you must make a saving throw, the creature gains a bonus to the saving throw equal to your Charisma modifier (with a minimum bonus of +1). You must be conscious to grant this bonus.
 
           At 18th level, the range of this aura increases to 30 feet.
-      - title: Aura of Courage
-        description: |
-          Starting at 10th level, you and friendly creatures within 10 feet of you can't be frightened while you are conscious.
+      # - title: Aura of Courage
+      #   description: |
+      #     Starting at 10th level, you and friendly creatures within 10 feet of you can't be frightened while you are conscious.
 
-          At 18th level, the range of this aura increases to 30 feet.
-      - title: Improved Divine Smite
-        description: By 11th level, you are so suffused with righteous might that all your melee weapon strikes carry divine power with them. Whenever you hit a creature with a melee weapon, the creature takes an extra 1d8 radiant damage. If you also use your Divine Smite with an attack, you add this damage to the extra damage of your Divine Smite.
+      #     At 18th level, the range of this aura increases to 30 feet.
+      # - title: Improved Divine Smite
+      #   description: By 11th level, you are so suffused with righteous might that all your melee weapon strikes carry divine power with them. Whenever you hit a creature with a melee weapon, the creature takes an extra 1d8 radiant damage. If you also use your Divine Smite with an attack, you add this damage to the extra damage of your Divine Smite.
       - title: Oath Spells
       - title: Channel Divinity
         description: |
@@ -136,10 +142,11 @@ classes:
       - Wrathful Smite
       - Zone of Truth
   - title: Bard
-    sub_class: College of Valor
+    sub_class: College of Lore
     icon: fad fa-mandolin
-    level: 3
+    level: 4
     hit_dice_type: d8
+    spellcasting_ability: charisma
     features:
       - title: Bardic Inspiration (d6)
         description: |
@@ -151,6 +158,28 @@ classes:
 
           Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.
         charges: 4
+      - title: Jack of All Trades
+        description: |
+          Starting at 2nd level, you can add half your proficiency bonus, rounded down, to any ability check you make that doesn’t already include your proficiency bonus
+      - title: Song of Rest (d6)
+        description: |
+          Beginning at 2nd level, you can use soothing music or oration to help revitalize your wounded allies during a short rest. If you or any friendly creatures who can hear your performance regain hit points at the end of the short rest by spending one or more Hit Dice, each of those creatures regains an extra 1d6 hit points.
+
+          The extra hit points increase when you reach certain levels in this class: to 1d8 at 9th level, to 1d10 at 13th level, and to 1d12 at 17th level.
+      - title: Bard College (College of Lore)
+        description: |
+          At 3rd level, you delve into the advanced techniques of a bard college of your choice, such as the College of Lore. Your choice grants you features at 3rd level and again at 6th and 14th level.
+      - title: Expertise
+        description: |
+          At 3rd level, choose two of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.
+
+          At 10th level, you can choose another two skill proficiencies to gain this benefit.
+      - title: Bonus Proficiencies
+        description: When you join the College of Lore at 3rd level, you gain proficiency with three skills of your choice.
+      - title: Cutting Words
+        description: |
+          Also at 3rd level, you learn how to use your wit to distract, confuse, and otherwise sap the confidence and competence of others. When a creature that you can see within 60 feet of you makes an attack roll, an ability check, or a damage roll, you can use your reaction to expend one of your uses of Bardic Inspiration, rolling a Bardic Inspiration die and subtracting the number rolled from the creature's roll. You can choose to use this feature after the creature makes its roll, but before the GM determines whether the attack roll or ability check succeeds or fails, or before the creature deals its damage. The creature is immune if it can't hear you or if it's immune to being charmed.
+      - title: Ability Score Improvement
     spells:
       - Mage Hand
       - Dancing Lights
@@ -160,8 +189,8 @@ classes:
       - Bane
       - Charm Person
       - Longstrider
-      - Identify
-      - Leomund’s Tiny Hut
+      - Identify (ritual)
+      - Leomund’s Tiny Hut (ritual)
       - Dimension Door
       - Polymorph
       - Locate Creature
@@ -172,13 +201,14 @@ equipment:
       title: Phoenix Fire Longsword
       damage_modifier: 2
       to_hit_modifier: 2
-      description: ""
-    - extends: Longbow
+      description: |
+        A powerful longsword with a glowing ruby in its pommel.
+
+        The ruby was once part of the legendary *Phoenix Fire Gauntlet*, a powerful and destructive arcane relic. The gauntlet has been destroyed, but the trickster Bryn saved the jewel.
     - extends: Lance
     - extends: Warhammer
     - extends: Javelin
       quantity: 5
-    - extends: Crossbow, heavy
   armor:
     - title: Phoenix Plate
       type: Heavy
@@ -206,7 +236,7 @@ skill_proficiencies:
   arcana: 0.5
   athletics: 0.5
   deception: 0.5
-  history: 0.5
+  history: 1
   insight: 1
   intimidation: 0.5
   investigation: 0.5
@@ -234,12 +264,12 @@ ability_scores:
   wisdom: 15
   charisma: 18
 spell_slots:
-  - level: 1
+  - level: One
     slots: 4
-  - level: 2
+  - level: Two
     slots: 3
-  - level: 3
+  - level: Three
     slots: 3
-  - level: 4
-    slots: 1
+  - level: Four
+    slots: 2
 ---

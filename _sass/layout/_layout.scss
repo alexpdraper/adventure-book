@@ -2,7 +2,7 @@
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  @media screen and (min-width: $breakpoint-md) {
+  @media screen and (min-width: $breakpoint-lg) {
     flex-wrap: nowrap;
     min-height: 100vh;
   }

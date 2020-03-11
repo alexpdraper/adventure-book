@@ -6,7 +6,7 @@
   }
 }
 
-@media (min-width: $breakpoint-lg) {
+@media (min-width: $breakpoint-md) {
   .columns {
     display: flex;
     flex-wrap: nowrap;
@@ -24,9 +24,6 @@
     .column + .column {
       margin-left: 1rem;
     }
-    // .column.narrower {
-    //   flex: 0 0 300px;
-    // }
   }
 }
 

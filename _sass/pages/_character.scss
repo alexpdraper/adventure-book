@@ -34,3 +34,17 @@
     }
   }
 }
+
+.profile-image {
+  max-width: 330px;
+  padding: 0.75rem;
+  background-color: #fff;
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 0px 0.5rem 1rem rgba(10, 10, 10, 0.15);
+  border-radius: 1234908px;
+  img {
+    border-radius: 1234908px;
+    display: block;
+  }
+}

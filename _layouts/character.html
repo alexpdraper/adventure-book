@@ -95,7 +95,21 @@ tabs:
           {% for class in page.classes %}
             {% if class.spells %}
               <div id="{{class.title}}-spells-tab">
-                {% include character_spells.html spells=class.spells %}
+                {% if class.spellcasting_ability %}
+                  {% assign spellcasting_modifier = page.ability_scores[class.spellcasting_ability] %}
+                  {% assign spellcasting_modifier = spellcasting_modifier | minus: 10 | divided_by: 2 | floor %}
+                  <div class="tags">
+                    <span class="tag">
+                      Spell save DC:&nbsp;<strong>{{8 | plus: proficiency_bonus | plus: spellcasting_modifier}}</strong>
+                    </span>
+                    <span class="tag">
+                      Spell attack modifier:&nbsp;<strong>{{proficiency_bonus | plus: spellcasting_modifier}}</strong>
+                    </span>
+                  </div>
+                {% endif %}
+                <div class="article">
+                  {% include character_spells.html spells=class.spells %}
+                </div>
               </div>
             {% endif %}
           {% endfor %}
@@ -107,15 +121,52 @@ tabs:
         <h3>Profile</h3>
 
         {% if page.img_url %}
-          <img src="{{page.img_url}}">
+          <div class="profile-image">
+            <img src="{{page.img_url}}">
+          </div>
         {% endif %}
 
+        {{content}}
+
         <h4>Ideal</h4>
-        <p>{{page.ideal}}</p>
+        {{page.ideal | default: "…" | markdownify}}
         <h4>Bond</h4>
-        <p>{{page.bond}}</p>
+        {{page.bond | default: "…" | markdownify}}
         <h4>Flaw</h4>
-        <p>{{page.flaw}}</p>
+        {{page.flaw | default: "…" | markdownify}}
+
+        <table>
+          <tbody>
+            <tr>
+              <th style="text-align: left;">Alignment</th>
+              <td style="text-align: right;">{{page.alignment | default: "—"}}</td>
+            </tr>
+            <tr>
+              <th style="text-align: left;">Background</th>
+              <td style="text-align: right;">{{page.background | default: "—"}}</td>
+            </tr>
+            <tr>
+              <th style="text-align: left;">Deity</th>
+              <td style="text-align: right;">{{page.deity | default: "—"}}</td>
+            </tr>
+            <tr>
+              <th style="text-align: left;">Gender</th>
+              <td style="text-align: right;">{{page.gender | default: "—"}}</td>
+            </tr>
+            <tr>
+              <th style="text-align: left;">Age</th>
+              <td style="text-align: right;">{{page.age | default: "—"}}</td>
+            </tr>
+            <tr>
+              <th style="text-align: left;">Height</th>
+              <td style="text-align: right;">{{page.height | default: "—"}}</td>
+            </tr>
+            <tr>
+              <th style="text-align: left;">Weight</th>
+              <td style="text-align: right;">{{page.weight | default: "—"}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <!-- Features -->
@@ -146,17 +197,22 @@ tabs:
             {% if class.features %}
               <div id="{{class.title}}-features-tab">
                 {% for feature in class.features %}
-                  <div class="character-spells">
-                    <details>
-                      <summary class="h5">
+                  <details class="details">
+                    <summary>
+                      <div class="arrow-icon">
+                        <i class="fal fa-chevron-right"></i>
+                      </div>
+                      <div class="title">
                         {{feature.title}}
-                        {% if feature.charges %}
-                        <span class="icon" style="padding: 0 0.25em;"><i class="fad fa-sun"></i></span>
-                        &times;<span id="feature-charges-total-{{feature.title | slugify}}">{{feature.charges}}</span>
-                        {% endif %}
-                      </summary>
+                      </div>
                       {% if feature.charges %}
-                        <div style="margin-top: 0.5rem;">
+                      <span class="icon" style="padding: 0 0.25em;"><i class="fad fa-sun"></i></span>
+                      &times;<span id="feature-charges-total-{{feature.title | slugify}}">{{feature.charges}}</span>
+                      {% endif %}
+                    </summary>
+                    <div class="info article">
+                      {% if feature.charges %}
+                        <div>
                           <icon-progress
                             data-updates="feature-charges-total-{{feature.title | slugify}}"
                             icon="fad fa-sun"
@@ -165,13 +221,9 @@ tabs:
                           ></icon-progress>
                         </div>
                       {% endif %}
-                      {% if feature.description %}
-                        <div class="article spell-details">
-                          {{feature.description | markdownify}}
-                        </div>
-                      {% endif %}
-                    </details>
-                  </div>
+                      {{feature.description | default: "*No description*" | markdownify}}
+                    </div>
+                  </details>
                 {% endfor %}
               </div>
             {% endif %}
@@ -189,8 +241,8 @@ tabs:
             include weapons_list.html
             strength=page.ability_scores.strength
             dexterity=page.ability_scores.dexterity
-            dexterity=page.ability_scores.dexterity
             proficiency_bonus=proficiency_bonus
+            weapon_proficiencies=page.weapon_proficiencies
             weapons=page.equipment.weapons
           %}
         {% endif %}
@@ -206,7 +258,7 @@ tabs:
 
     <div class="column narrower">
       <div class="article">
-        <h2>HP: {{page.hit_point_max}}/{{page.hit_point_max}}</h2>
+        <h2>{{page.hit_point_max}}/{{page.hit_point_max}}</h2>
 
         <div class="tags">
           <span class="tag">
@@ -263,8 +315,6 @@ tabs:
             skill_proficiencies=page.skill_proficiencies
           %}
         {% endif %}
-
-        {{content}}
       </div>
     </div>
   </div>
