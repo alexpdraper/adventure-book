@@ -16,6 +16,7 @@ includes:
     {% assign weapon_data = site.data.weapons | where: "title", weapon.extends | first %}
     {% assign to_hit = weapon.to_hit_modifier | default: weapon_data.to_hit_modifier | default: 0 %}
     {% assign lower_name = weapon_data.title | downcase %}
+    {% assign damage_modifier = weapon.damage_modifier | default: weapon_data.damage_modifier | default: 0 %}
 
     {% if include.weapon_proficiencies[weapon_data.proficiency][weapon_data.type] or include.weapon_proficiencies[lower_name] %}
       {% assign to_hit = to_hit | plus: include.proficiency_bonus %}
@@ -30,10 +31,13 @@ includes:
 
     {% if finesse %}
       {% assign to_hit = to_hit | plus: finesse_modifier %}
+      {% assign damage_modifier = damage_modifier | plus: finesse_modifier %}
     {% elsif weapon_data.type == "melee" %}
       {% assign to_hit = to_hit | plus: strength_modifier %}
+      {% assign damage_modifier = damage_modifier | plus: strength_modifier %}
     {% else %}
       {% assign to_hit = to_hit | plus: dex_modifier %}
+      {% assign damage_modifier = damage_modifier | plus: dex_modifier %}
     {% endif %}
 
     {% assign weapon_damage = weapon.damage | default: weapon_data.damage %}
@@ -59,7 +63,6 @@ includes:
           <div style="display: flex; justify-content: space-between;">
             <span>
               {% assign weapon_dice = weapon_damage | split: "d" %}
-              {% assign damage_modifier = weapon.damage_modifier | default: weapon_data.damage_modifier | default: 0 %}
 
               {% if weapon_dice.size == 2 %}
                 <span>
@@ -73,6 +76,8 @@ includes:
                 {{weapon_damage}}
                 {% if damage_modifier > 0 %}
                   + {{damage_modifier}}
+                {% elsif damage_modifier < 0 %}
+                  - {{damage_modifier | abs}}
                 {% endif %}
               </span>
             </span>
@@ -93,7 +98,6 @@ includes:
           <th style="text-align: left; border: 0; width: 30%; vertical-align: top;">Damage</th>
           <td style="border: 0; vertical-align: top;">
             {% assign weapon_dice = weapon_damage | split: "d" %}
-            {% assign damage_modifier = weapon.damage_modifier | default: weapon_data.damage_modifier | default: 0 %}
 
             {% if weapon_dice.size == 2 %}
               {% for i in (1..weapon_dice[0]) %}
@@ -104,6 +108,8 @@ includes:
             {{weapon_damage}}
             {% if damage_modifier > 0 %}
               + {{damage_modifier}}
+            {% elsif damage_modifier < 0 %}
+              - {{damage_modifier | abs}}
             {% endif %}
             {{weapon.damage_type | default: weapon_data.damage_type | downcase}}
           </td>

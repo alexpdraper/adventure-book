@@ -1,0 +1,44 @@
+---
+layout: main
+breadcrumbs:
+  - label: Home
+    url: /
+    current: false
+  - label: Story
+    url: /story
+    current: false
+---
+
+{% if page.breadcrumbs %}
+  {% assign breadcrumbs = page.breadcrumbs %}
+{% else %}
+  {% assign breadcrumbs = layout.breadcrumbs %}
+{% endif %}
+
+{% include breadcrumbs.html breadcrumbs=breadcrumbs %}
+
+<article class="article section">
+  <h1>{{page.title}}</h1>
+  {{content}}
+</article>
+
+{% if page.previous or page.next %}
+  <div class="flex justify-between p-4 mt-5 border-t border-solid border-black-200">
+    <div>
+      {% if page.previous %}
+        <a href="{{page.previous.url}}" class="flex items-center">
+          <span class="text-sm inline-block pr-1"><i class="fad fa-arrow-alt-left"></i></span>
+          <span>{{page.previous.title}}</span>
+        </a>
+      {% endif %}
+    </div>
+    <div>
+      {% if page.next %}
+        <a href="{{page.next.url}}" class="flex items-center">
+          <span>{{page.next.title}}</span>
+          <span class="text-sm inline-block pl-1"><i class="fad fa-arrow-alt-right"></i></span>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

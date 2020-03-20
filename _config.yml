@@ -8,6 +8,9 @@ collections:
   spells:
     output: true
     permalink: /:collection/:name
+  monsters:
+    output: true
+    permalink: /:collection/:name
 
 defaults:
   - scope:
@@ -25,3 +28,8 @@ defaults:
       type: spells
     values:
       layout: spell
+  - scope:
+      path: ""
+      type: monsters
+    values:
+      layout: monster

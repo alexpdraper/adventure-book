@@ -8,8 +8,9 @@ gender: Male
 age: 31
 height: "5' 8\""
 weight: 170 lbs
+# hit_point_max: 96
 hit_point_max: 96
-ac: 25
+ac: 24/25
 img_url: "/assets/images/kaden-profile.jpg"
 proficiencies:
   - Lyre
@@ -23,7 +24,8 @@ classes:
   - title: Paladin
     sub_class: Oath of the Ancients
     icon: fad fa-shield-cross
-    level: 8
+    # level: 8
+    level: 11
     hit_dice_type: d10
     spellcasting_ability: charisma
     features:
@@ -42,7 +44,7 @@ classes:
           Alternatively, you can expend 5 hit points from your pool of healing to cure the target of one disease or neutralize one poison affecting it. You can cure multiple diseases and neutralize multiple poisons with a single use of Lay on Hands, expending hit points separately for each one.
 
           This feature has no effect on undead and constructs.
-        charges: 45
+        charges: 55
       - title: Fighting Style (Defense)
         description: |
           While you are wearing armor, you gain a +1 bonus to AC.
@@ -77,13 +79,13 @@ classes:
           Starting at 6th level, whenever you or a friendly creature within 10 feet of you must make a saving throw, the creature gains a bonus to the saving throw equal to your Charisma modifier (with a minimum bonus of +1). You must be conscious to grant this bonus.
 
           At 18th level, the range of this aura increases to 30 feet.
-      # - title: Aura of Courage
-      #   description: |
-      #     Starting at 10th level, you and friendly creatures within 10 feet of you can't be frightened while you are conscious.
+      - title: Aura of Courage
+        description: |
+          Starting at 10th level, you and friendly creatures within 10 feet of you can't be frightened while you are conscious.
 
-      #     At 18th level, the range of this aura increases to 30 feet.
-      # - title: Improved Divine Smite
-      #   description: By 11th level, you are so suffused with righteous might that all your melee weapon strikes carry divine power with them. Whenever you hit a creature with a melee weapon, the creature takes an extra 1d8 radiant damage. If you also use your Divine Smite with an attack, you add this damage to the extra damage of your Divine Smite.
+          At 18th level, the range of this aura increases to 30 feet.
+      - title: Improved Divine Smite
+        description: By 11th level, you are so suffused with righteous might that all your melee weapon strikes carry divine power with them. Whenever you hit a creature with a melee weapon, the creature takes an extra 1d8 radiant damage. If you also use your Divine Smite with an attack, you add this damage to the extra damage of your Divine Smite.
       - title: Oath Spells
       - title: Channel Divinity
         description: |
@@ -114,8 +116,8 @@ classes:
       - Cure Wounds
       - Daylight
       - Detect Good and Evil
-      - Detect Magic (Ritual)
-      - Detect Poison and Disease (Ritual)
+      - Detect Magic (ritual)
+      - Detect Poison and Disease (ritual)
       - Dispel Magic
       - Divine Favor
       - Elemental Weapon
@@ -132,69 +134,69 @@ classes:
       - Protection from Energy
       - Protection from Evil and Good
       - Protection from Poison
-      - Purify Food and Drink (Ritual)
+      - Purify Food and Drink (ritual)
       - Remove Curse
       - Revivify
       - Searing Smite
       - Shield of Faith
-      - Speak with Animals (Ritual)
+      - Speak with Animals (ritual)
       - Thunderous Smite
       - Wrathful Smite
       - Zone of Truth
-  - title: Bard
-    sub_class: College of Lore
-    icon: fad fa-mandolin
-    level: 4
-    hit_dice_type: d8
-    spellcasting_ability: charisma
-    features:
-      - title: Bardic Inspiration (d6)
-        description: |
-          You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6.
+  # - title: Bard
+  #   sub_class: College of Lore
+  #   icon: fad fa-mandolin
+  #   level: 4
+  #   hit_dice_type: d8
+  #   spellcasting_ability: charisma
+  #   features:
+  #     - title: Bardic Inspiration (d6)
+  #       description: |
+  #         You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6.
 
-          Once within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the GM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time.
+  #         Once within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the GM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time.
 
-          You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest.
+  #         You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest.
 
-          Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.
-        charges: 4
-      - title: Jack of All Trades
-        description: |
-          Starting at 2nd level, you can add half your proficiency bonus, rounded down, to any ability check you make that doesn’t already include your proficiency bonus
-      - title: Song of Rest (d6)
-        description: |
-          Beginning at 2nd level, you can use soothing music or oration to help revitalize your wounded allies during a short rest. If you or any friendly creatures who can hear your performance regain hit points at the end of the short rest by spending one or more Hit Dice, each of those creatures regains an extra 1d6 hit points.
+  #         Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.
+  #       charges: 4
+  #     - title: Jack of All Trades
+  #       description: |
+  #         Starting at 2nd level, you can add half your proficiency bonus, rounded down, to any ability check you make that doesn’t already include your proficiency bonus
+  #     - title: Song of Rest (d6)
+  #       description: |
+  #         Beginning at 2nd level, you can use soothing music or oration to help revitalize your wounded allies during a short rest. If you or any friendly creatures who can hear your performance regain hit points at the end of the short rest by spending one or more Hit Dice, each of those creatures regains an extra 1d6 hit points.
 
-          The extra hit points increase when you reach certain levels in this class: to 1d8 at 9th level, to 1d10 at 13th level, and to 1d12 at 17th level.
-      - title: Bard College (College of Lore)
-        description: |
-          At 3rd level, you delve into the advanced techniques of a bard college of your choice, such as the College of Lore. Your choice grants you features at 3rd level and again at 6th and 14th level.
-      - title: Expertise
-        description: |
-          At 3rd level, choose two of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.
+  #         The extra hit points increase when you reach certain levels in this class: to 1d8 at 9th level, to 1d10 at 13th level, and to 1d12 at 17th level.
+  #     - title: Bard College (College of Lore)
+  #       description: |
+  #         At 3rd level, you delve into the advanced techniques of a bard college of your choice, such as the College of Lore. Your choice grants you features at 3rd level and again at 6th and 14th level.
+  #     - title: Expertise
+  #       description: |
+  #         At 3rd level, choose two of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.
 
-          At 10th level, you can choose another two skill proficiencies to gain this benefit.
-      - title: Bonus Proficiencies
-        description: When you join the College of Lore at 3rd level, you gain proficiency with three skills of your choice.
-      - title: Cutting Words
-        description: |
-          Also at 3rd level, you learn how to use your wit to distract, confuse, and otherwise sap the confidence and competence of others. When a creature that you can see within 60 feet of you makes an attack roll, an ability check, or a damage roll, you can use your reaction to expend one of your uses of Bardic Inspiration, rolling a Bardic Inspiration die and subtracting the number rolled from the creature's roll. You can choose to use this feature after the creature makes its roll, but before the GM determines whether the attack roll or ability check succeeds or fails, or before the creature deals its damage. The creature is immune if it can't hear you or if it's immune to being charmed.
-      - title: Ability Score Improvement
-    spells:
-      - Mage Hand
-      - Dancing Lights
-      - Message
-      - Mending
-      - Animal Friendship
-      - Bane
-      - Charm Person
-      - Longstrider
-      - Identify (ritual)
-      - Leomund’s Tiny Hut (ritual)
-      - Dimension Door
-      - Polymorph
-      - Locate Creature
-      - Clairvoyance
+  #         At 10th level, you can choose another two skill proficiencies to gain this benefit.
+  #     - title: Bonus Proficiencies
+  #       description: When you join the College of Lore at 3rd level, you gain proficiency with three skills of your choice.
+  #     - title: Cutting Words
+  #       description: |
+  #         Also at 3rd level, you learn how to use your wit to distract, confuse, and otherwise sap the confidence and competence of others. When a creature that you can see within 60 feet of you makes an attack roll, an ability check, or a damage roll, you can use your reaction to expend one of your uses of Bardic Inspiration, rolling a Bardic Inspiration die and subtracting the number rolled from the creature's roll. You can choose to use this feature after the creature makes its roll, but before the GM determines whether the attack roll or ability check succeeds or fails, or before the creature deals its damage. The creature is immune if it can't hear you or if it's immune to being charmed.
+  #     - title: Ability Score Improvement
+  #   spells:
+  #     - Mage Hand
+  #     - Dancing Lights
+  #     - Message
+  #     - Mending
+  #     - Animal Friendship
+  #     - Bane
+  #     - Charm Person
+  #     - Longstrider
+  #     - Identify (ritual)
+  #     - Leomund’s Tiny Hut (ritual)
+  #     - Dimension Door
+  #     - Polymorph
+  #     - Locate Creature
+  #     - Clairvoyance
 equipment:
   weapons:
     - extends: Longsword
@@ -205,7 +207,7 @@ equipment:
         A powerful longsword with a glowing ruby in its pommel.
 
         The ruby was once part of the legendary *Phoenix Fire Gauntlet*, a powerful and destructive arcane relic. The gauntlet has been destroyed, but the trickster Bryn saved the jewel.
-    - extends: Lance
+    - extends: Longbow
     - extends: Warhammer
     - extends: Javelin
       quantity: 5
@@ -233,24 +235,24 @@ weapon_proficiencies:
     melee: true
     ranged: true
 skill_proficiencies:
-  acrobatics: 0.5
-  animal_handling: 0.5
-  arcana: 0.5
-  athletics: 0.5
-  deception: 1
-  history: 1
+  acrobatics: 0
+  animal_handling: 0
+  arcana: 0
+  athletics: 0
+  deception: 0
+  history: 0
   insight: 1
-  intimidation: 1
-  investigation: 0.5
-  medicine: 1
-  nature: 2
-  perception: 2
-  performance: 0.5
+  intimidation: 0
+  investigation: 0
+  medicine: 0
+  nature: 1
+  perception: 1
+  performance: 0
   persuasion: 1
-  religion: 0.5
-  sleight_of_hand: 0.5
-  stealth: 0.5
-  survival: 0.5
+  religion: 0
+  sleight_of_hand: 0
+  stealth: 0
+  survival: 0
 saving_throw_proficiencies:
   strength: 0
   dexterity: 0
@@ -272,6 +274,6 @@ spell_slots:
     slots: 3
   - level: Three
     slots: 3
-  - level: Four
-    slots: 2
+  # - level: Four
+  #   slots: 2
 ---

@@ -1,39 +1,63 @@
 {% assign ability_names = "strength,dexterity,constitution,intelligence,wisdom,charisma" | split: "," %}
+{% assign view = include.view | default: "stacked" %}
 
-{%- comment -%}
-<div class="tags">
-  {% for ability_name in ability_names %}
-    {% assign ability_score = include.ability_scores[ability_name] %}
-    {% assign score_modifier = ability_score | minus: 10 | divided_by: 2 | floor %}
-
-    <span class="tag">
-      {{ability_name | capitalize}}
-      <span style="opacity: 0.7; margin: 0 0.25em;">{{ability_score}}</span>
-      <span>{%- if score_modifier >= 0 -%}+{%- endif -%}{{score_modifier}}</span>
-    </span>
-  {% endfor %}
-</div>
-{%- endcomment -%}
-
-<table class="ability-scores-table">
-  <thead>
-    <tr>
-      <th style="text-align: left;">Ability</th>
-      <th style="text-align: right;">Score</th>
-    </tr>
-  </thead>
-  <tbody>
+{% if view == "tags" %}
+  <div class="tags">
     {% for ability_name in ability_names %}
       {% assign ability_score = include.ability_scores[ability_name] %}
       {% assign score_modifier = ability_score | minus: 10 | divided_by: 2 | floor %}
 
-      <tr>
-        <td>{{ability_name | capitalize}}</td>
-        <td style="text-align: right;">
-          {{ability_score}}
-          <span class="ability-modifier">{%- if score_modifier >= 0 -%}+{%- endif -%}{{score_modifier}}</span>
-        </td>
-      </tr>
+      <span class="tag">
+        {{ability_name | capitalize}}
+        <span style="opacity: 0.7; margin: 0 0.25em;">{{ability_score}}</span>
+        <span>{%- if score_modifier >= 0 -%}+{%- endif -%}{{score_modifier}}</span>
+      </span>
     {% endfor %}
-  </tbody>
-</table>
+  </div>
+{% elsif view == "horizontal" %}
+  <table class="ability-scores-table is-borderless">
+    <thead>
+      <tr>
+        {% for ability_name in ability_names %}
+          <th class="text-center border-0">{{ability_name | capitalize | slice: 0, 3}}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for ability_name in ability_names %}
+          {% assign ability_score = include.ability_scores[ability_name] %}
+          {% assign score_modifier = ability_score | minus: 10 | divided_by: 2 | floor %}
+
+          <td class="text-center">
+            {{ability_score}}
+            <span class="ability-modifier">{%- if score_modifier >= 0 -%}+{%- endif -%}{{score_modifier}}</span>
+          </td>
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+{% else %}
+  <table class="ability-scores-table">
+    <thead>
+      <tr>
+        <th style="text-align: left;">Ability</th>
+        <th style="text-align: right;">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ability_name in ability_names %}
+        {% assign ability_score = include.ability_scores[ability_name] %}
+        {% assign score_modifier = ability_score | minus: 10 | divided_by: 2 | floor %}
+
+        <tr>
+          <td>{{ability_name | capitalize}}</td>
+          <td style="text-align: right;">
+            {{ability_score}}
+            <span class="ability-modifier">{%- if score_modifier >= 0 -%}+{%- endif -%}{{score_modifier}}</span>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}

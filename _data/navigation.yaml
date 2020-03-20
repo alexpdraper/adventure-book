@@ -2,6 +2,8 @@ main:
   items:
     - title: Home
       url: /
+    # - title: Story
+    #   url: /story
     - title: Characters
       url: /characters
       children:
@@ -9,9 +11,13 @@ main:
           url: /characters/jubilant
         - title: Kaden
           url: /characters/kaden
+        - title: Lucan
+          url: /characters/lucan
         - title: Sarahphina
           url: /characters/sarahphina
     - title: NPCs
       url: /npcs
+    # - title: Monsters
+    #   url: /monsters
     - title: Spells
       url: /spells

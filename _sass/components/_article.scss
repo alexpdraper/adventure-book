@@ -52,6 +52,9 @@ $breakpoint-xl: 1200px;
     // border: 1px solid $text-color-lighter;
     border: 1px solid darken(#f9f1ea, 20);
     border-left-width: 5px;
+    & > * + * {
+      margin-top: 1em;
+    }
   }
 
   ul,

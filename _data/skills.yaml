@@ -14,5 +14,5 @@ performance: charisma
 persuasion: charisma
 religion: intelligence
 sleight_of_hand: dexterity
-stealth: charisma
+stealth: dexterity
 survival: wisdom
