@@ -7,12 +7,8 @@ breadcrumbs:
 ---
 
 # Felvand
-{% comment %}
 - [Story](/story)
-{% endcomment %}
 - [Spells](/spells)
 - [Characters](/characters)
 - [NPCs](/npcs)
-{% comment %}
 - [Monsters](/monsters)
-{% endcomment %}

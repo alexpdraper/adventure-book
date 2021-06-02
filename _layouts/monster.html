@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: main
 breadcrumbs:
   - label: Home
     url: /
@@ -8,8 +8,18 @@ breadcrumbs:
     url: /monsters
     current: false
 ---
+{% include breadcrumbs.html breadcrumbs=layout.breadcrumbs %}
 
-<h1>{{page.title}}</h1>
-{% include monster_card.html monster=page %}
-
-{{content}}
+<div class="flex justify-between flex-wrap md:flex-no-wrap">
+  <div class="p-4 flex-grow">
+    <h1>{{page.title}}</h1>
+    <div class="article">
+      {% include monster_card.html monster=page %}
+    </div>
+  </div>
+  <div class="p-4 flex-none md:w-1/2 xl:w-2/5">
+    <div class="article">
+      {{content}}
+    </div>
+  </div>
+</div>

@@ -7,9 +7,9 @@ level: 3
 hit_point_max: 16
 ac: 13
 gender: Female
-age: 121
-weight: 99 lb
-height: "4' 9\""
+age: 300
+weight: 150 lb
+height: "6'"
 proficiencies:
   - Lyre
   - Disguise kit

@@ -1,0 +1,34 @@
+- title: War Caster
+  description: |
+    You have practiced casting spells in the midst of combat, learning techniques that grant you the following benefits:
+
+    - You have advantage on Constitution saving throws that you make to maintain your concentration on a spell when you take damage.
+    - You can perform the somatic components of spells even when you have weapons or a shield in one or both hands.
+    - When a hostile creature’s movement provokes an opportunity attack from you, you can use your reaction to cast a spell at the creature, rather than making an opportunity attack. The spell must have a casting time of 1 action and must target only that creature.
+- title: Sharpshooter
+  description: |
+    You have mastered ranged weapons and can make shots that others find impossible. You gain the following benefits:
+    - Attacking at long range doesn’t impose disadvantage on your ranged weapon attack rolls.
+    - Your ranged weapon attacks ignore half cover and three-quarters cover.
+    - Before you make an attack with a ranged weapon that you are proficient with, you can choose to take a -5 penalty to the attack roll. If the attack hits, you add +10 to the attack’s damage.
+- title: Grappler
+  description: |
+    Prerequisite: Strength 13 or higher
+
+    You’ve developed the skills necessary to hold your own in close-quarters grappling. You gain the following benefits:
+
+    - You have advantage on attack rolls against a creature you are grappling.
+
+    - You can use your action to try to pin a creature grappled by you. To do so, make another grapple check. If you succeed, you and the creature are both restrained until the grapple ends.
+- title: Mounted Combatant
+  description: |
+    You are a dangerous foe to face while mounted. While you are mounted and aren’t incapacitated, you gain the following benefits:
+    - You have advantage on melee attack rolls against any unmounted creature that is smaller than your mount.
+    - You can force an attack targeted at your mount to target you instead.
+    - If your mount is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, it instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.
+- title: Sentinel
+  description: |
+    You have mastered techniques to take advantage of every drop in any enemy’s guard, gaining the following benefits:
+    - When you hit a creature with an opportunity attack, the creature’s speed becomes 0 for the rest of the turn.
+    - Creatures provoke opportunity attacks from you even if they take the Disengage action before leaving your reach.
+    - When a creature within 5 feet of you makes an attack against a target other than you (and that target doesn’t have this feat), you can use your reaction to make a melee weapon attack against the attacking creature.

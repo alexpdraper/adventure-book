@@ -281,6 +281,25 @@ tabs:
       <!-- Inventory -->
       <div id="inventory-tab" class="article" style="display: none;">
         <h3>Inventory</h3>
+
+        {% if page.title == "Kaden Gracefulheart" %}
+          <p>
+            <strong>Horn of Eldath</strong>
+            <br>
+            <em>Legendary Instrument</em>
+          </p>
+          <p>
+            User must be a follower of Eldath
+          </p>
+          <ul>
+            <li>
+              Increases Spell Save DC, damage, and other rolls by 1 when using bard spells
+            </li>
+            <li>
+              Adds 1d6 radiant damage to spells cast using this as a spellcasting focus
+            </li>
+          </ul>
+        {% endif %}
       </div>
     </div>
 
@@ -350,6 +369,42 @@ tabs:
             proficiency_bonus=proficiency_bonus
             skill_proficiencies=page.skill_proficiencies
           %}
+        {% endif %}
+
+        {% if page.feats %}
+          <h3>Feats</h3>
+          {% for feat in page.feats %}
+            {% assign feat_data = site.data.feats | where: "title", feat | first %}
+            <details class="details">
+              <summary>
+                <div class="summary">
+                  <div class="arrow-icon">
+                    <i class="fal fa-chevron-right"></i>
+                  </div>
+                  <div class="title">
+                    {{feat_data.title}}
+                  </div>
+                  {% if feat_data.charges %}
+                    <span class="icon" style="padding: 0 0.25em;"><i class="fad fa-sun"></i></span>
+                    &times;<span id="feature-charges-total-{{feat_data.title | slugify}}">{{feat_data.charges}}</span>
+                  {% endif %}
+                </div>
+              </summary>
+              <div class="info article">
+                {% if feat_data.charges %}
+                  <div>
+                    <icon-progress
+                      data-updates="feature-charges-total-{{featu_datatitle | slugify}}"
+                      icon="fad fa-sun"
+                      max="{{feat_data.charges}}"
+                      value="{{feat_data.charges}}"
+                    ></icon-progress>
+                  </div>
+                {% endif %}
+                {{feat_data.description | default: "*No description*" | markdownify}}
+              </div>
+            </details>
+          {% endfor %}
         {% endif %}
       </div>
     </div>

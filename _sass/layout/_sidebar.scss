@@ -1,24 +1,18 @@
 .sidebar {
-  width: 100%;
-  padding: 1.5rem;
   background-color: #bcdbbc;
   background-color: #e8a798;
   background-color: #e1d0d0;
   background-image: url('/assets/images/pink-stardust.png');
   font-family: $headings-font-family;
   font-weight: $headings-font-weight;
-  font-size: 1rem;
+}
 
-  @media screen and (min-width: $breakpoint-lg) {
-    max-width: 220px;
-    flex: 0 0 220px;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    font-size: 0.85rem;
-  }
-  @media (min-width: $breakpoint-xl) {
-    max-width: 260px;
-    flex: 0 0 260px;
-    font-size: 0.75rem;
+@media screen and (min-width: $breakpoint-lg) {
+  .sidebar.collapsed {
+    width: 1.5rem;
+    // max-width: 1rem;
+    & > div:first-child {
+      opacity: 0;
+    }
   }
 }

@@ -24,6 +24,45 @@ var domReady = (function () {
 })();
 
 domReady(function() {
+  console.log('domReady!');
+
+  var $sidebar = document.getElementById('sidebar');
+  var $sidebarToggle = document.getElementById('sidebar-toggle');
+  var $toggleChild = $sidebarToggle.firstElementChild;
+  $sidebarToggle.addEventListener('click', function () {
+    if ($sidebar.classList.contains('lg:-translate-x-48')) {
+      if (!$sidebar.classList.contains('relative')) {
+        $sidebar.classList.add('relative');
+      }
+      if ($sidebar.classList.contains('absolute')) {
+        $sidebar.classList.remove('absolute');
+      }
+      $sidebar.classList.remove('lg:-translate-x-48');
+      if ($toggleChild.classList.contains('rotate-180')) {
+        $toggleChild.classList.remove('rotate-180');
+      }
+      if (!$toggleChild.classList.contains('rotate-0')) {
+        $toggleChild.classList.add('rotate-0');
+      }
+    } else {
+      $sidebar.classList.add('lg:-translate-x-48');
+      if ($sidebar.classList.contains('relative')) {
+        $sidebar.classList.remove('relative');
+      }
+      if (!$sidebar.classList.contains('absolute')) {
+        $sidebar.classList.add('absolute');
+      }
+      if (!$toggleChild.classList.contains('rotate-180')) {
+        $toggleChild.classList.add('rotate-180');
+      }
+      if ($toggleChild.classList.contains('rotate-0')) {
+        $toggleChild.classList.remove('rotate-0');
+      }
+    }
+  });
+});
+
+domReady(function() {
   class IconProgress extends HTMLElement {
     static get observedAttributes() {
       return ['icon', 'value', 'max'];
